@@ -1,42 +1,47 @@
-# 🛍️ RetailRadar Pipeline
+# 📺 YouTubeCommentHarvester
 
-**RetailRadar Pipeline** is a robust data engineering project that simulates a real-world retail analytics backend. It processes **point-of-sale (POS)** data from multiple sources (CSV, JSON), performs data cleaning and transformation, and enables insightful retail analytics such as **top-selling products**, **seasonal trends**, and **stockout risk detection**.
+**YouTubeCommentHarvester** is a data pipeline that ingests **live YouTube comments** using the **YouTube Data API**, performs **text preprocessing and sentiment analysis**, and stores structured results in a **BigQuery data warehouse**. The system supports **scheduled batch jobs** and generates reports on **trending sentiments across video categories**.
 
-The pipeline uses **dbt** for modular data modeling and **Apache Airflow** for orchestration and scheduling. It serves as a foundation for a retail analytics dashboard.
+This project demonstrates how to build a scalable, cloud-friendly NLP pipeline for real-time social media analysis.
+
 
 
 ## 📌 Features
 
-- 📥 **Data Ingestion**:
-  - Reads and unifies POS data from CSV and JSON formats
-  - Supports batch processing of sales, inventory, and product metadata
+- 🔄 **Live Comment Ingestion**:
+  - Uses the YouTube Data API to fetch comments from videos, channels, or search queries
+  - Supports configurable polling frequency and pagination
 
-- 🧹 **Data Cleaning & Transformation**:
-  - Handles nulls, duplicates, and inconsistent data types
-  - Standardizes timestamps, product IDs, and category fields
+- 🧹 **Text Preprocessing**:
+  - Removes emojis, links, and stop words
+  - Normalizes text for model-ready input
 
-- 🏗 **Data Modeling with dbt**:
-  - Dimensional modeling (fact_sales, dim_product, dim_store)
-  - Incremental builds and source freshness checks
-  - Derived metrics: sales volume, revenue, stock status
+- 💬 **Sentiment Analysis**:
+  - Pre-trained models (e.g., TextBlob, Vader, or custom transformers)
+  - Classifies comments into Positive / Negative / Neutral
 
-- 📈 **Analytics & Insights**:
-  - Top-selling products by region and category
-  - Weekly/monthly trend analysis
-  - Stockout detection based on inventory vs. sales velocity
+- 🧠 **Categorical Aggregation**:
+  - Groups results by video category (e.g., Music, Gaming, News)
+  - Computes trending sentiment scores over time
 
-- 📆 **Orchestration with Airflow**:
-  - DAGs to schedule ingestion, transformation, and reporting tasks
-  - Task failure alerts and logging for pipeline monitoring
+- ⏰ **Batch Scheduling**:
+  - Scheduled jobs using Cloud Composer (Airflow) or cron
+  - Batches comment ingestion and sentiment scoring
+
+- 🧾 **BigQuery Data Warehouse**:
+  - Stores raw, processed, and scored comment data
+  - Optimized schema for analytics and dashboarding
+
 
 
 ## 🛠️ Tech Stack
 
+- **APIs**: YouTube Data API v3
 - **Data Processing**: Python, Pandas
-- **Data Modeling**: dbt (Data Build Tool)
-- **Workflow Orchestration**: Apache Airflow
-- **Storage**: PostgreSQL or Snowflake (configurable)
-- **Visualization**: Ready for integration with dashboards (e.g., Metabase, Tableau)
+- **NLP & Sentiment Analysis**: TextBlob, Vader, or HuggingFace Transformers
+- **Orchestration**: Apache Airflow (Cloud Composer optional)
+- **Data Warehouse**: Google BigQuery
+- **Visualization (optional)**: Google Data Studio / Looker Studio
 
 
 
@@ -45,13 +50,13 @@ The pipeline uses **dbt** for modular data modeling and **Apache Airflow** for o
 ### Prerequisites
 
 - Python 3.8+
-- PostgreSQL (or another supported warehouse)
-- dbt Core
-- Apache Airflow (via Docker or local install)
+- Google Cloud account with BigQuery enabled
+- YouTube API Key
+- GCP SDK installed and authenticated
 
-### Clone & Install
+### Install Dependencies
 
 ```bash
-git clone https://github.com/your-username/retail-radar-pipeline.git
-cd retail-radar-pipeline
+git clone https://github.com/your-username/YouTubeCommentHarvester.git
+cd YouTubeCommentHarvester
 pip install -r requirements.txt
